@@ -5,6 +5,4 @@
 include <lib/z_carriage.scad>
 
 
-
-rotate([-90,0,0])z_carriage(arm=1);
-
+rotate([-90,0,0])z_carriage(arm=0);

@@ -13,16 +13,18 @@
 include <../configuration.scad>
 
 
-pneumatic_thread = 9/2; //1/8 BSP
-//pneumatic_thread = 5.5/2; //6mm thread
+//pneumatic_thread = 9/2; //1/8 BSP
+pneumatic_thread = 5.5/2; //6mm thread
 
+feed_hole = 2.2; //1.75mm filament
+//feed_hole = 3.5; // 3mm filament
 
 //30mm distance between jheads
 
 //mounting_plate();
 
 
-jhead_mount_fan();
+//jhead_mount_fan();
 jhead_mount();
 //calibration();
 
@@ -286,6 +288,26 @@ module mounting_plate(){
 					}
 			}
 			
+			//raised sections for cones
+			
+			translate([plate_width/2-15,plate_length/2,0])  
+				hull(){
+					color("green") translate([0,0,jhead_recess_height+jhead_top_height+7])
+						cylinder(r=pneumatic_thread+4, h=10, $fn=20);
+					translate([0,0,plate_depth])  
+						cylinder(r=20/2,  h=7+1.7, $fn=20);
+				
+				}	
+							
+			translate([plate_width/2+15,plate_length/2,0])  
+				hull(){
+					color("green") translate([0,0,jhead_recess_height+jhead_top_height+7])
+						cylinder(r=pneumatic_thread+4, h=10, $fn=20);
+					translate([0,0,plate_depth])  
+						cylinder(r=20/2,  h=7+1.7, $fn=20);
+				
+				}	
+			
 					
 			translate([plate_width/2-sSize/2-15,-10+3,-25-1]) fanShroud(right=0);
 			translate([plate_width/2-sSize/2+15,-10+3,-25-1]) fanShroud(left=0);
@@ -379,11 +401,30 @@ module mounting_plate(){
 		translate([plate_width/2+15, plate_length/2, 0]) hotend_mount();
 
 
-		//pneumatic holes
+/*		//pneumatic holes
 		translate([plate_width/2-15,plate_length/2,jhead_recess_height+jhead_top_height])
 			cylinder(r=pneumatic_thread, h=10, $fn=20);
 		translate([plate_width/2+15,plate_length/2,jhead_recess_height+jhead_top_height])
 			cylinder(r=pneumatic_thread, h=10, $fn=20);
+*/
+
+	
+		for(x=[plate_width/2-15, plate_width/2+15]){
+			//feed hole
+			translate([x,plate_length/2,jhead_recess_height+jhead_top_height])
+				cylinder(d=feed_hole, h=7+1.7+10, $fn=20);
+			//cone for filament guide
+			color("green") translate([x,plate_length/2,jhead_recess_height+jhead_top_height+2])
+				cylinder(r2=pneumatic_thread, r1=feed_hole/2, h=7, $fn=20);
+			//pneumatic hole
+			color("green") translate([x,plate_length/2,jhead_recess_height+jhead_top_height+9])
+				cylinder(r=pneumatic_thread, h=10+0.1, $fn=20);
+		}
+
+
+
+
+
 
 
 
