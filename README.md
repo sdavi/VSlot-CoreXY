@@ -7,6 +7,7 @@ Thanks to Zelogik's great [AluXY](https://github.com/zelogik/AluXY) 3D printer t
 
  
 Frame Size: 400mm x 400mm x 500mm
+
 Build Area (X x Y x Z): 210mm x 195mm x 240mm.  
 
 ![ScreenShot](/IMG_5496.jpg)
