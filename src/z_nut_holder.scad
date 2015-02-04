@@ -17,7 +17,6 @@ t_nut_total_height = 25;//b1
 
 t_nut();
 
-
 module t_nut(){
 
 	difference(){
@@ -80,4 +79,3 @@ module holes(){
 	}
 
 }
-

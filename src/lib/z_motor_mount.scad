@@ -29,8 +29,8 @@ echo("width: ", z_motor_mount_width);
 echo("length: ", z_motor_mount_length);
 
 
-bearing_mount();
-//z_motor_end(single_piece=1);
+//bearing_mount();
+//z_motor_end(single_piece=0);
 
 
 

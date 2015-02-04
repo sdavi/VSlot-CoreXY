@@ -19,7 +19,7 @@ motor_mount_thickness = 4;
 
 
 
-motor_mount();
+//motor_mount();
 %illustration();
 
 

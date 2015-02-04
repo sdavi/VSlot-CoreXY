@@ -13,20 +13,21 @@
 include <../configuration.scad>
 
 
-pneumatic_thread = 9/2; //1/8 BSP
-//pneumatic_thread = 5.5/2; //6mm thread
+//pneumatic_thread = 9/2; //1/8 BSP
+pneumatic_thread = 5.5/2; //6mm thread
 
 //feed_hole = 2.2; //1.75mm filament
 feed_hole = 3.5; // 3mm filament
 
 
 
-//jhead_mount_fan();
-jhead_mount();
+jhead_mount_fan();
+//jhead_mount();
 //calibration();
 
 //bowden_holder2(); //ziptie
 //bowden_holder();
+
 
 
 module jhead_mount_fan(){
@@ -46,14 +47,6 @@ module jhead_mount(){
 	    separator();//
 	}
 }
-
-
-
-
-
-
-
-
 
 
 padding = 0.1; //if holes print small can make them a bit bigger
@@ -190,11 +183,11 @@ module bowden_holder2(){
 		union(){
 
 
-			hull(){ //
-				translate([plate_width/2-16/2,plate_length-5,0])
-					cube_fillet([16, 5, 8], top=[0,0,0,0]);
-				translate([plate_width/2-33/2,plate_length-5,-15]) 
-					cube([33,5,15]);
+			color("yellow")hull(){ //
+				translate([plate_width/2-36.5/2,plate_length-5,0])
+					cube_fillet([36.5, 5, 8], top=[0,0,0,0]);
+				translate([plate_width/2-40/2,plate_length-5,-15]) 
+					cube([40,5,15]);
 			}
 			
 			hull(){ //top part
@@ -302,7 +295,7 @@ module mounting_plate(){
 		}
 
 		//countersunk holes for carriage screws
-		translate([plate_width/2, 7/2-delta_length/2, plate_depth/2]) rotate([90,0,0]){
+		translate([plate_width/2, 7/2-delta_length/2-2, plate_depth/2]) rotate([90,0,0]){
 			translate([-mounting_screws_distance/2, -0.5/2, 0])
 				cylinder(r=m3_washer_diameter/2, h=7+delta_length+0.5, center=true, $fn=32);
 			translate([+mounting_screws_distance/2, -0.5/2, 0]) 
@@ -361,6 +354,15 @@ module mounting_plate(){
 
 		
 	}//end difference
+
+
+	//fill top of countersink to print without supports, drill out
+	translate([plate_width/2, 7/2-delta_length/2-2, plate_depth/2]) rotate([90,0,0]){
+		translate([-mounting_screws_distance/2, -0.5/2, 0])
+			cylinder(r=m3_washer_diameter/2+0.8, h=0.3, center=true, $fn=32);
+		translate([+mounting_screws_distance/2, -0.5/2, 0]) 
+			cylinder(r=m3_washer_diameter/2+0.8, h=0.3, center=true, $fn=32);
+		}
 
 
 }

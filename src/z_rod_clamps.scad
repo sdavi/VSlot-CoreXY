@@ -1,5 +1,6 @@
 // z_rod clamps
 // Author: sdavi
+// Based on jand1122's RepRap-XY: https://github.com/jand1122/RepRap-XY
 
 
 include <configuration.scad>
